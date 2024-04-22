@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "lib/rubygems_analyzer/version"
+require_relative 'lib/rubygems_analyzer/version'
 
 Gem::Specification.new do |spec|
-  spec.name = "rubygems_analyzer"
+  spec.name = 'rubygems_analyzer'
   spec.version = RubygemsAnalyzer::VERSION
-  spec.authors = ["aiandrox", "sontixyou"]
-  spec.email = ["aiandrox7@gmail.com"]
+  spec.authors = %w[aiandrox sontixyou]
+  spec.email = ['aiandrox7@gmail.com']
 
-  spec.summary = "RubyGems Analyzer is a tool to analyze RubyGems"
-  spec.description = ""
-  spec.homepage = "https://github.com/aiandrox-org/rubygems_analyzer"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.summary = 'RubyGems Analyzer is a tool to analyze RubyGems'
+  spec.description = ''
+  spec.homepage = 'https://github.com/aiandrox-org/rubygems_analyzer'
+  spec.required_ruby_version = '>= 2.6.0'
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  spec.metadata['allowed_push_host'] = "TODO: Set to your gem server 'https://example.com'"
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/aiandrox-org/rubygems_analyzer"
-  spec.metadata["changelog_uri"] = "https://github.com/aiandrox-org/rubygems_analyzer/blob/main/CHANGELOG.md"
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/aiandrox-org/rubygems_analyzer'
+  spec.metadata['changelog_uri'] = 'https://github.com/aiandrox-org/rubygems_analyzer/blob/main/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -27,13 +27,14 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
     end
   end
-  spec.bindir = "exe"
+  spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
