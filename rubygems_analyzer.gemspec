@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'RubyGems Analyzer is a tool to analyze RubyGems'
   spec.description = ''
   spec.homepage = 'https://github.com/aiandrox-org/rubygems_analyzer'
-  spec.required_ruby_version = '>= 2.6.0'
+  spec.required_ruby_version = '>= 3.3.0'
 
   spec.metadata['allowed_push_host'] = "TODO: Set to your gem server 'https://example.com'"
 
