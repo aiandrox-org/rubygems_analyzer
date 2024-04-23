@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../lib/rubygems_analyzer'
+
+RubygemsAnalyzer::Command.run(ARGV[0])
