@@ -1,18 +1,24 @@
 # frozen_string_literal: true
 
+require 'yaml'
+
 module RubygemsAnalyzer
   class Command
-    def self.run(argument)
-      puts "Hello, \e[35m\"#{argument}\"\e[0m"
-    end
+    def self.run(gem_name)
+      data = File.open(File.expand_path('lib/rubygems_analyzer/rubygems_stats.yml'), 'r') { |f| YAML.load(f) }['gem_stats']
+      ordered_data = data.sort_by { _1['star'] }.reverse
 
-    def self.draw_bar_chart(data)
-      max_key_length = data.keys.max_by(&:length).length
-      scale_factor = data.values.max / 50 # 50 is the max length of the graph
+      target_gem_stats = data.find { _1['name'] == gem_name }
+      return puts 'No such gem' unless target_gem_stats
 
-      data.each do |key, value|
-        graph_length = value / scale_factor
-        puts "#{key.ljust(max_key_length)} ┤\e[33m#{'■' * graph_length}\e[0m #{value}"
+      max_name_length = data.map { _1['name'].length }.max
+      scale_factor = data.map { _1['star'] }.max / 50 # is the max length of the graph
+
+      ordered_data.each do |gem|
+        graph_length = gem['star'] / scale_factor
+        color = gem['name'] == gem_name ? "\e[33m" : "\e[34m"
+        graph_bar = "#{color}#{'■' * graph_length}\e[0m"
+        puts "#{gem['name'].ljust(max_name_length)} ┤#{graph_bar} #{gem['star']}"
       end
     end
   end
