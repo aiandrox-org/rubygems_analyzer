@@ -1,16 +1,13 @@
 gem_stats:
-  - name: "a"
+  - name: "bundler"
     version: "1.0.1"
-    star: 100
-  - name: "aa"
+    star: 2069337843
+  - name: "aws-sdk-core"
     version: "2.0.1"
-    star: 1000
-  - name: "aaa"
+    star: 1213342602
+  - name: "aws-sigv4"
     version: "2.0.1"
-    star: 5000
-  - name: "b"
+    star: 1066372310
+  - name: "jmespath"
     version: "2.0.1"
-    star: 2000
-  - name: "bb"
-    version: "2.0.1"
-    star: 500
+    star: 1039051136
