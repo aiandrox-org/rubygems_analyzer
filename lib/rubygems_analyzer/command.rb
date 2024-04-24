@@ -2,6 +2,7 @@
 
 require 'yaml'
 require_relative 'ruby_gem'
+require_relative 'rubygems_client'
 
 module RubygemsAnalyzer
   class Command
@@ -11,10 +12,19 @@ module RubygemsAnalyzer
 
     def initialize(gem_name)
       @gem_name = gem_name
+
+      data = File.open(File.expand_path('lib/rubygems_analyzer/rubygems_stats.yml'), 'r') do |f|
+        YAML.load(f)
+      end['gem_stats']
+      @ruby_gems = data.map { |gem| RubyGem.new(name: gem['name'], downloads: gem['downloads']) }
     end
 
     def run
       return puts 'No such gem' unless target_gem
+
+      @ruby_gems.delete_if { _1.name == target_gem.name }
+      @ruby_gems.push(target_gem)
+      ordered_data = @ruby_gems.sort_by(&:downloads).reverse
 
       max_name_length = ordered_data.map { _1.name.length }.max
       scale_factor = ordered_data.map(&:downloads).max / 50 # is the max length of the graph
@@ -31,18 +41,13 @@ module RubygemsAnalyzer
 
     attr_reader :gem_name
 
-    def ordered_data
-      @ordered_data ||= begin
-        data = File.open(File.expand_path('lib/rubygems_analyzer/rubygems_stats.yml'), 'r') do |f|
-          YAML.load(f)
-        end['gem_stats']
-        ruby_gems = data.map { |gem| RubyGem.new(name: gem['name'], downloads: gem['downloads']) }
-        ruby_gems.sort_by(&:downloads).reverse
-      end
-    end
-
     def target_gem
-      @target_gem ||= ordered_data.find { _1.name == gem_name }
+      return @target_gem if defined?(@target_gem)
+
+      client = RubygemsAnalyzer::RubygemsClient.new(gem_name)
+      @target_gem = RubyGem.new(name: gem_name, downloads: client.total_downloads_count)
+    rescue Gems::NotFound
+      @target_gem = nil
     end
   end
 end
