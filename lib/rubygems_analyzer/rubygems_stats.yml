@@ -1,0 +1,16 @@
+gem_stats:
+  - name: "a"
+    version: "1.0.1"
+    star: 100
+  - name: "aa"
+    version: "2.0.1"
+    star: 1000
+  - name: "aaa"
+    version: "2.0.1"
+    star: 5000
+  - name: "b"
+    version: "2.0.1"
+    star: 2000
+  - name: "bb"
+    version: "2.0.1"
+    star: 500

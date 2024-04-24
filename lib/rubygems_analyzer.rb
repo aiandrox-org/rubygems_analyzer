@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require_relative 'rubygems_analyzer/version'
+require_relative 'rubygems_analyzer/command'
+
 require 'rubygems'
 require 'gems'
+
 
 module RubygemsAnalyzer
   class Error < StandardError; end
