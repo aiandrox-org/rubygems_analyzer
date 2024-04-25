@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 require_relative 'gems_page'
 require_relative '../client/nokogiri'
 
@@ -11,13 +13,24 @@ module RubygemsAnalyzer
       end
 
       def initialize(alphabets)
-        @alphabets = alphabets
+        @alphabets = alphabets.map(&:upcase)
       end
 
       def call
         @alphabets.each do |letter|
           gems = GetRubyGemsPerLetter.call(letter)
-          # CSVに出力する処理を書く
+          write_to_file(letter, gems)
+        end
+      end
+
+      private
+
+      def write_to_file(letter, gems)
+        CSV.open("lib/rubygems_analyzer/calculatored_data/#{letter}.csv", 'a') do |csv|
+          gems.each do |gem|
+            csv_row = [gem[:name], gem[:version], gem[:downloads]]
+            csv << csv_row
+          end
         end
       end
     end
@@ -48,7 +61,7 @@ module RubygemsAnalyzer
 
           sleep 1
         end
-        gems
+        gems.flatten
       end
 
       private

@@ -12,7 +12,7 @@ module RubygemsAnalyzer
         version = con.at_css('.gems__gem__version').children.text
         downloads = con.at_css('.gems__gem__downloads__count').children.text.split.first
         downloads_count = downloads.gsub(/(\d{0,3}),(\d{3})/, '\1\2').to_i
-        { name:, version:, downloads_count: }
+        { name:, version:, downloads: downloads_count }
       end
     end
 
