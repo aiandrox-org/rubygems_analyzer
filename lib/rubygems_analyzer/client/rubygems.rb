@@ -26,8 +26,7 @@ module RubygemsAnalyzer
       end
 
       # バージョンのcreated_atの差分を求められる
-      def leadtime_between_versions
-      end
+      def leadtime_between_versions; end
 
       private
 
