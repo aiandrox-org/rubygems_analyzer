@@ -1,35 +1,17 @@
 # RubygemsAnalyzer
 
-TODO: Delete this and the text below, and describe your gem
+## usage
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rubygems_analyzer`. To experiment with that code, run `bin/console` for an interactive prompt.
+1. register your rubygems.org API key to `~/.gems/credentials`
+2. run `bin/rubygems_analyzer` with gem name
 
-## Installation
+```sh
+$ bin/rubygems_analyzer bundler
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+bundler has 2071385454 downloads (rank 1/4)
 
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rubygems_analyzer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rubygems_analyzer/blob/master/CODE_OF_CONDUCT.md).
-
-## Code of Conduct
-
-Everyone interacting in the RubygemsAnalyzer project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/rubygems_analyzer/blob/master/CODE_OF_CONDUCT.md).
+1 bundler      ┤■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 2071385454
+2 aws-sdk-core ┤■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 1213342602
+3 aws-sigv4    ┤■■■■■■■■■■■■■■■■■■■■■■■■■ 1066372310
+4 jmespath     ┤■■■■■■■■■■■■■■■■■■■■■■■■■ 1039051136
+```
