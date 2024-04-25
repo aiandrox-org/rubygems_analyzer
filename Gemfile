@@ -10,6 +10,7 @@ gem 'dotenv', groups: [:development, :test]
 # Rubygems client
 gem 'gems'
 gem 'mechanize'
+gem 'octokit'
 gem 'rake'
 gem 'rspec'
 gem 'rubocop'
