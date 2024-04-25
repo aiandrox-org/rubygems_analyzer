@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'activesupport'
+gem 'dotenv', groups: [:development, :test]
 # Rubygems client
 gem 'gems'
 gem 'mechanize'
