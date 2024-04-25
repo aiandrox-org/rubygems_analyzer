@@ -27,8 +27,7 @@ module RubygemsAnalyzer
           older_created_at = Time.parse(older['created_at'])
           leadtime = newer_created_at - older_created_at
 
-          # NOTE: 秒数で出力する
-          puts "version_number: #{newer['number']}, leadtime: #{leadtime}"
+          puts "version_number: #{newer['number']}, leadtime: #{leadtime}sec"
         end
       end
     end
