@@ -8,7 +8,7 @@ gemspec
 gem 'activesupport'
 # Rubygems client
 gem 'gems'
-gem 'nokogiri'
+gem 'mechanize'
 gem 'rake'
 gem 'rspec'
 gem 'rubocop'
