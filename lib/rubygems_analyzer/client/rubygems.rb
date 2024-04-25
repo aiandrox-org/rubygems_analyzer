@@ -21,6 +21,10 @@ module RubygemsAnalyzer
         Gem.versions(gem_name)
       end
 
+      def version_count
+        versions.count.size
+      end
+
       def source_code_uri
         gem['source_code_uri']
       end
