@@ -8,6 +8,7 @@ gemspec
 gem 'activesupport'
 # Rubygems client
 gem 'gems'
+gem 'nokogiri'
 gem 'rake'
 gem 'rspec'
 gem 'rubocop'
