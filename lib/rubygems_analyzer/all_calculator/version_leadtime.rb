@@ -23,12 +23,18 @@ module RubygemsAnalyzer
         # NOTE: バージョンの順番が必ずしも作成日時の順番と一致しないため、作成日時でソートする
         sorted_versions = versions.sort_by!{|version| version['created_at']}.reverse!
         sorted_versions.each_cons(2) do |(newer, older)|
-          newer_created_at = Time.parse(newer['created_at'])
-          older_created_at = Time.parse(older['created_at'])
-          leadtime = newer_created_at - older_created_at
+          leadtime = calculate_version_leadtime(newer, older)
 
           puts "version_number: #{newer['number']}, leadtime: #{leadtime}sec"
         end
+      end
+
+      private
+
+      def calculate_version_leadtime(newer, older)
+        newer_created_at = Time.parse(newer['created_at'])
+        older_created_at = Time.parse(older['created_at'])
+        newer_created_at - older_created_at
       end
     end
   end
