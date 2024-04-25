@@ -18,7 +18,7 @@ module RubygemsAnalyzer
 
       # 先頭が最新バージョン
       def versions
-        Gem.versions(gem_name)
+        Gems.versions(gem_name)
       end
 
       def version_count
