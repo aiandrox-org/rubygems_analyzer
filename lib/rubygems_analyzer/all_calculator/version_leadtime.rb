@@ -31,9 +31,6 @@ module RubygemsAnalyzer
           puts "version_number: #{newer['number']}, leadtime: #{leadtime}"
         end
       end
-      # versionsを取得して、数を数える
-      # 2未満なら、nilを返す
-      # 2以上なら、最新バージョンとその1つ前のバージョンのcreated_atの差分を求める
     end
   end
 end
