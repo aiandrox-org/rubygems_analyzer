@@ -3,7 +3,11 @@
 ## usage
 
 1. register your rubygems.org API key to `~/.gems/credentials`
-2. run `bin/rubygems_analyzer` with gem name
+2. add 0600 permission to `~/.gems/credentials`
+  ```sh
+  $ chmod 0600 ~/.gems/credentials
+  ```
+3. run `bin/rubygems_analyzer` with gem name
 
 ```sh
 $ bin/rubygems_analyzer bundler
