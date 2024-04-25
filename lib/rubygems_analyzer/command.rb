@@ -2,7 +2,7 @@
 
 require 'yaml'
 require_relative 'ruby_gem'
-require_relative 'rubygems_client'
+require_relative 'client/rubygems'
 
 module RubygemsAnalyzer
   class Command
@@ -44,7 +44,7 @@ module RubygemsAnalyzer
     def target_gem
       return @target_gem if defined?(@target_gem)
 
-      client = RubygemsAnalyzer::RubygemsClient.new(gem_name)
+      client = Client::Rubygems.new(gem_name)
       @target_gem = RubyGem.new(name: gem_name, downloads: client.total_downloads_count)
     rescue Gems::NotFound
       @target_gem = nil
