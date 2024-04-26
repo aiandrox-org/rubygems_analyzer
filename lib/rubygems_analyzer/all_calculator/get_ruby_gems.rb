@@ -58,8 +58,6 @@ module RubygemsAnalyzer
           break unless gem_page.next_page?
 
           self.current_page = current_page + 1
-
-          sleep 0.1
         end
         gems.flatten
       end
