@@ -18,7 +18,7 @@ module RubygemsAnalyzer
 
       def call
         versions = client.versions
-        return nil if versions.size < 2
+        return 0 if versions.size < 2
 
         leadtimes = []
         # NOTE: バージョンの順番が必ずしも作成日時の順番と一致しないため、作成日時でソートする
