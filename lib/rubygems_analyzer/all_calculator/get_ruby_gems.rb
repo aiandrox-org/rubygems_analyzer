@@ -46,7 +46,6 @@ module RubygemsAnalyzer
 
           self.current_page = current_page + 1
         end
-        gems.flatten
       end
 
       private
