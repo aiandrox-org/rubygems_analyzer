@@ -15,9 +15,9 @@ module RubygemsAnalyzer
         downloads = con.at_css('.gems__gem__downloads__count').children.text.split.first
         downloads_count = downloads.gsub(/(\d{0,3}),(\d{3})/, '\1\2').to_i
         rubygems_client = Client::Rubygems.new(name)
-        repo = rubygems_client.source_code_uri || rubygems_client.homepage_uri
+        source_url = rubygems_client.source_code_uri || rubygems_client.homepage_uri
 
-        { name:, repo:, version:, downloads: downloads_count }
+        { name:, source_url:, version:, downloads: downloads_count }
       end
     end
 
