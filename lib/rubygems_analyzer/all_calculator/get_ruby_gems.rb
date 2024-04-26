@@ -28,7 +28,7 @@ module RubygemsAnalyzer
       def write_to_file(letter, gems)
         CSV.open("lib/rubygems_analyzer/calculatored_data/#{letter}.csv", 'a') do |csv|
           gems.each do |gem|
-            csv_row = [gem[:name], gem[:source_url], gem[:version], gem[:downloads]]
+            csv_row = [gem[:name], gem[:source_url], gem[:average_version_leadtime], gem[:version], gem[:downloads]]
             csv << csv_row
           end
         end
@@ -59,7 +59,7 @@ module RubygemsAnalyzer
 
           self.current_page = current_page + 1
 
-          sleep 1
+          sleep 0.1
         end
         gems.flatten
       end

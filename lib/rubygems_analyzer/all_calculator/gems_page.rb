@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../client/rubygems'
+require_relative 'version_leadtime'
 
 module RubygemsAnalyzer
   class GemsPage
@@ -17,7 +18,13 @@ module RubygemsAnalyzer
         rubygems_client = Client::Rubygems.new(name)
         source_url = rubygems_client.source_code_uri || rubygems_client.homepage_uri
 
-        { name:, source_url:, version:, downloads: downloads_count }
+        {
+          name:,
+          source_url:,
+          average_version_leadtime: average_version_leadtime(gem_name: name, client: rubygems_client),
+          version:,
+          downloads: downloads_count
+        }
       end
     end
 
@@ -28,5 +35,12 @@ module RubygemsAnalyzer
     private
 
     attr_reader :doc
+
+    def average_version_leadtime(gem_name:, client:)
+      leadtimes = AllCalculator::VersionLeadtime.call(gem_name:, client:)
+      return 0 if leadtimes.nil?
+
+      leadtimes.sum / leadtimes.size
+    end
   end
 end
