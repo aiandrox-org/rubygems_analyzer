@@ -22,7 +22,7 @@ module RubygemsAnalyzer
       end
 
       def version_count
-        versions.count.size
+        versions.size
       end
 
       def source_code_uri
