@@ -48,7 +48,7 @@ module RubygemsAnalyzer
 
     def get_star_count(source_url)
       repo_name = extract_repository_name_from(source_url)
-      repo_name.empty? ? 0 : Client::Github.new.get_star(repo_name:)
+      repo_name.empty? ? 0 : github_client.get_star(repo_name:)
     end
 
     # NOTE: owner/repo_nameの形式で返す
@@ -56,6 +56,10 @@ module RubygemsAnalyzer
       return '' if source_url.nil? || !source_url.include?('github.com')
 
       URI.parse(source_url).path.split('/')[1..2].join('/')
+    end
+
+    def github_client
+      @github_client ||= Client::Github.new
     end
   end
 end
