@@ -33,9 +33,6 @@ module RubygemsAnalyzer
         gem['homepage_uri']
       end
 
-      # バージョンのcreated_atの差分を求められる
-      def leadtime_between_versions; end
-
       private
 
       def gem

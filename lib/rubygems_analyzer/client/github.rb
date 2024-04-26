@@ -22,7 +22,8 @@ module RubygemsAnalyzer
           0
         end
 
-        sleep 0.4
+        # NOTE: GitHub APIのレート制限に引っかからないようにする
+        sleep 1.4
       end
     end
   end
