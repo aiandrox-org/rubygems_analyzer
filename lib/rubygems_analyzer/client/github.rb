@@ -16,14 +16,12 @@ module RubygemsAnalyzer
       end
 
       def get_star(repo_name:)
-        begin
-          client.repository(repo_name)[:stargazers_count]
-        rescue Octokit::NotFound, Octokit::InvalidRepository
-          0
-        end
-
-        # NOTE: GitHub APIのレート制限に引っかからないようにする
-        sleep 1.4
+        client.repository(repo_name)[:stargazers_count]
+      rescue Octokit::NotFound, Octokit::InvalidRepository
+        0
+      rescue Octokit::TooManyRequests => e
+        puts e
+        raise
       end
     end
   end
