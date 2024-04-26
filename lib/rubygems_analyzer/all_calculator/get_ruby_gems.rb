@@ -29,7 +29,7 @@ module RubygemsAnalyzer
       def write_to_file(letter, gems)
         CSV.open("lib/rubygems_analyzer/calculatored_data/#{letter}.csv", 'a') do |csv|
           gems.each do |gem|
-            csv_row = [gem[:name], gem[:version], gem[:downloads]]
+            csv_row = [gem[:name], gem[:repo], gem[:version], gem[:downloads]]
             csv << csv_row
           end
         end
