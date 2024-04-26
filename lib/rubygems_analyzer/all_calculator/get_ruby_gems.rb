@@ -18,24 +18,12 @@ module RubygemsAnalyzer
 
       def call
         @alphabets.each do |letter|
-          gems = GetRubyGemsPerLetter.call(letter)
-          write_to_file(letter, gems)
-        end
-      end
-
-      private
-
-      def write_to_file(letter, gems)
-        CSV.open("lib/rubygems_analyzer/calculatored_data/#{letter}.csv", 'a') do |csv|
-          gems.each do |gem|
-            csv_row = gem.each_value.to_a
-            csv << csv_row
-          end
+          WriteRubyGemsPerLetter.call(letter)
         end
       end
     end
 
-    class GetRubyGemsPerLetter
+    class WriteRubyGemsPerLetter
       RUBYGEMS_URL = 'https://rubygems.org/gems'
 
       def self.call(letter)
@@ -46,14 +34,13 @@ module RubygemsAnalyzer
         @client = Client::Nokogiri.new
         @letter = letter
         @current_page = 1
-        @gems = []
       end
 
       def call
         loop do
           doc = client.get(url)
           gem_page = GemsPage.new(doc)
-          gems << gem_page.gems
+          write_to_file(gem_page.gems)
 
           break unless gem_page.next_page?
 
@@ -64,10 +51,19 @@ module RubygemsAnalyzer
 
       private
 
-      attr_accessor :client, :letter, :current_page, :gems
+      attr_accessor :client, :letter, :current_page
 
       def url
         "#{RUBYGEMS_URL}?letter=#{letter}&page=#{current_page}"
+      end
+
+      def write_to_file(gems)
+        CSV.open("lib/rubygems_analyzer/calculatored_data/#{letter}.csv", 'a') do |csv|
+          gems.each do |gem|
+            csv_row = gem.each_value.to_a
+            csv << csv_row
+          end
+        end
       end
     end
   end
