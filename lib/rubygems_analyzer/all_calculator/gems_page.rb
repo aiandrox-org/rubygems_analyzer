@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../client/rubygems'
+require_relative '../client/github'
 require_relative 'version_leadtime'
 
 module RubygemsAnalyzer
@@ -24,6 +25,7 @@ module RubygemsAnalyzer
           version_count: rubygems_client.version_count,
           version:,
           downloads: downloads_count,
+          star_count: get_star_count(source_url),
           source_url:
         }
       end
@@ -42,6 +44,18 @@ module RubygemsAnalyzer
       return 0 if leadtimes.nil?
 
       leadtimes.sum / leadtimes.size
+    end
+
+    def get_star_count(source_url)
+      repo_name = extract_repository_name_from(source_url)
+      repo_name.empty? ? 0 : Client::Github.new.get_star(repo_name:)
+    end
+
+    # NOTE: owner/repo_nameの形式で返す
+    def extract_repository_name_from(source_url)
+      return '' if source_url.nil? || !source_url.include?('github.com')
+
+      URI.parse(source_url).path.split('/')[1..2].join('/')
     end
   end
 end
