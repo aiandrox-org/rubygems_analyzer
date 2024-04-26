@@ -15,9 +15,6 @@ module RubygemsAnalyzer
       def get_star(repo_name:)
         client.repository(repo_name)[:stargazers_count]
       end
-
-      def repo
-        @repo ||= client.repository(repo_name)
     end
   end
 end
