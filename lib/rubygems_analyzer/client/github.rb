@@ -18,7 +18,7 @@ module RubygemsAnalyzer
       def get_star(repo_name:)
         begin
           client.repository(repo_name)[:stargazers_count]
-        rescue Octokit::NotFound
+        rescue Octokit::NotFound, Octokit::InvalidRepository
           0
         end
 
