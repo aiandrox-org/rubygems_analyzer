@@ -11,7 +11,7 @@ module RubygemsAnalyzer
       def initialize
         @client = Octokit::Client.new(
           client_id: ENV.fetch('GITHUB_OAUTH_CLIENT_ID'),
-          client_sercret: ENV.fetch('GITHUB_OAUTH_CLIENT_SECRET')
+          client_secret: ENV.fetch('GITHUB_OAUTH_CLIENT_SECRET')
         )
       end
 
