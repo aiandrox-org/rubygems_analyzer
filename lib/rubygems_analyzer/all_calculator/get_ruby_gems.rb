@@ -4,7 +4,6 @@ require 'csv'
 
 require_relative 'gems_page'
 require_relative '../client/nokogiri'
-require_relative '../client/rubygems'
 
 module RubygemsAnalyzer
   module AllCalculator

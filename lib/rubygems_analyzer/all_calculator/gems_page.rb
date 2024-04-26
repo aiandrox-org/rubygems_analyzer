@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../client/rubygems'
+
 module RubygemsAnalyzer
   class GemsPage
     def initialize(doc)
