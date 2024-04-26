@@ -20,10 +20,11 @@ module RubygemsAnalyzer
 
         {
           name:,
-          source_url:,
           average_version_leadtime: average_version_leadtime(gem_name: name, client: rubygems_client),
+          version_count: rubygems_client.version_count,
           version:,
-          downloads: downloads_count
+          downloads: downloads_count,
+          source_url:
         }
       end
     end
