@@ -59,6 +59,7 @@ module RubygemsAnalyzer
       return '' if source_url.nil?
 
       if source_url.start_with?('https://github.com') || source_url.start_with?('http://github.com')
+      if source_url.start_with?('https://github.com/') || source_url.start_with?('http://github.com/')
         URI.parse(source_url).path.split('/')[1..2].join('/')
       else
         ''
