@@ -16,6 +16,9 @@ module RubygemsAnalyzer
         doc = ::Nokogiri::HTML.parse(page_uri)
         @logger.info("get: #{url}")
         doc
+      rescue Net::OpenTimeout
+        sleep 3
+        retry
       end
     end
   end
