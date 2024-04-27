@@ -19,6 +19,9 @@ module RubygemsAnalyzer
       # 先頭が最新バージョン
       def versions
         Gems.versions(gem_name)
+      rescue Net::OpenTimeout
+        sleep 3
+        retry
       end
 
       def version_count
@@ -37,6 +40,9 @@ module RubygemsAnalyzer
 
       def gem
         @gem ||= Gems.info(gem_name)
+      rescue Net::OpenTimeout
+        sleep 3
+        retry
       end
     end
   end
