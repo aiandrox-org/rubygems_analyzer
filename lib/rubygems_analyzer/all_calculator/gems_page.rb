@@ -57,9 +57,15 @@ module RubygemsAnalyzer
     # NOTE: owner/repo_nameの形式で返す
     def extract_repository_name_from(source_url)
       return '' if source_url.nil?
+      return '' if source_url == 'https://github.com/' || source_url == 'http://github.com/'
 
       if source_url.start_with?('https://github.com/') || source_url.start_with?('http://github.com/')
-        URI.parse(source_url).path.split('/')[1..2].join('/')
+        puts source_url
+        begin
+          URI.parse(source_url).path.split('/')[1..2].join('/')
+        rescue URI::InvalidURIError
+          ''
+        end
       else
         ''
       end
