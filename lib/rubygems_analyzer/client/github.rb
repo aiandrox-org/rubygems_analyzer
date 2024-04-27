@@ -17,8 +17,10 @@ module RubygemsAnalyzer
 
       def get_star(repo_name:)
         client.repository(repo_name)[:stargazers_count]
-      rescue Octokit::NotFound, Octokit::InvalidRepository
+      rescue Octokit::NotFound, Octokit::InvalidRepository, Octokit::RepositoryUnavailable
         0
+      rescue Faraday::ConnectionFailed
+        retry
       rescue Octokit::TooManyRequests
         resets_in = client.rate_limit.resets_in
         puts "GitHub API rate limit exceeded. Retry after rate limit reset. resets_in: #{resets_in}"
