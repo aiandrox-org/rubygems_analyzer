@@ -3,6 +3,9 @@
 require 'yaml'
 require_relative 'ruby_gem'
 require_relative 'client/rubygems'
+require_relative 'client/github'
+require_relative 'calculatored_data/get_ruby_gems_from_csv'
+require_relative 'all_calculator/version_leadtime'
 
 module RubygemsAnalyzer
   module AllCalculator
@@ -14,10 +17,7 @@ module RubygemsAnalyzer
       def initialize(gem_name)
         @gem_name = gem_name
 
-        data = File.open(File.expand_path('lib/rubygems_analyzer/rubygems_stats.yml'), 'r') do |f|
-          YAML.load(f)
-        end['gem_stats']
-        @ruby_gems = data.map { |gem| RubyGem.new(name: gem['name'], downloads: gem['downloads']) }
+        @ruby_gems = RubygemsAnalyzer::CalculatoredData::GetRubyGemsFromCsv.call(alphabets: ('M'..'Z').to_a)
       end
 
       def run
@@ -45,10 +45,39 @@ module RubygemsAnalyzer
       def target_gem
         return @target_gem if defined?(@target_gem)
 
-        client = Client::Rubygems.new(gem_name)
-        @target_gem = RubyGem.new(name: gem_name, downloads: client.total_downloads_count)
+        rubygems_client = Client::Rubygems.new(gem_name)
+        github_client = Client::Github.new
+        leadtimes = AllCalculator::VersionLeadtime.call(gem_name:, client: rubygems_client)
+        source_url = rubygems_client.source_code_uri || rubygems_client.homepage_uri
+        repo_name = extract_repository_name_from(source_url)
+        @target_gem = RubyGem.new(
+          name: gem_name,
+          downloads: rubygems_client.total_downloads_count,
+          source_url:,
+          version: rubygems_client.versions.first,
+          version_count: rubygems_client.version_count,
+          average_version_leadtime: leadtimes.empty? ? 0 : leadtimes.sum / leadtimes.size,
+          star_count: repo_name.empty? ? 0 : github_client.get_star(repo_name:)
+        )
       rescue Gems::NotFound
         @target_gem = nil
+      end
+
+      # NOTE: owner/repo_nameの形式で返す
+      def extract_repository_name_from(source_url)
+        return '' if source_url.nil?
+        return '' if source_url == 'https://github.com/' || source_url == 'http://github.com/'
+
+        if source_url.start_with?('https://github.com/') || source_url.start_with?('http://github.com/')
+          puts source_url
+          begin
+            URI.parse(source_url).path.split('/')[1..2].join('/')
+          rescue URI::InvalidURIError
+            ''
+          end
+        else
+          ''
+        end
       end
     end
   end

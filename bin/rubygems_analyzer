@@ -4,4 +4,4 @@
 require 'json'
 require_relative '../lib/rubygems_analyzer'
 
-RubygemsAnalyzer::Command.run(ARGV[0])
+RubygemsAnalyzer::AllCalculator::Command.run(ARGV[0])

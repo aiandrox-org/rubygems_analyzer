@@ -5,7 +5,7 @@ require 'csv'
 require_relative '../ruby_gem'
 
 module RubygemsAnalyzer
-  module AllCalculator
+  module CalculatoredData
     class GetRubyGemsFromCsv
       def self.call(alphabets: ('A'..'Z').to_a)
         new(alphabets).call
