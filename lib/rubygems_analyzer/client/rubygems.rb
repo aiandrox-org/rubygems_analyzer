@@ -16,9 +16,9 @@ module RubygemsAnalyzer
         gem['downloads']
       end
 
-      # 先頭が最新バージョン
       def versions
-        Gems.versions(gem_name)
+        # NOTE: バージョンの順番が必ずしも作成日時の順番と一致しないため、作成日時でソートする
+        Gems.versions(gem_name).sort_by { |version| version['created_at'] }.reverse
       rescue Net::OpenTimeout
         sleep 3
         retry

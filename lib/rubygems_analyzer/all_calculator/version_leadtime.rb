@@ -21,9 +21,7 @@ module RubygemsAnalyzer
         return [0] if versions.size < 2
 
         leadtimes = []
-        # NOTE: バージョンの順番が必ずしも作成日時の順番と一致しないため、作成日時でソートする
-        sorted_versions = versions.sort_by! { |version| version['created_at'] }.reverse!
-        sorted_versions.each_cons(2) do |(newer, older)|
+        versions.each_cons(2) do |(newer, older)|
           leadtime = calculate_version_leadtime(newer, older)
 
           leadtimes << leadtime

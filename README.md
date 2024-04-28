@@ -16,7 +16,7 @@ bundler has 2071385454 downloads (rank 1/4)
 ```
 
 
-## calculator daily data
+## calculator weekly data
 
 1. register your rubygems.org API key to `~/.gems/credentials`
 2. add 0600 permission to `~/.gems/credentials`
