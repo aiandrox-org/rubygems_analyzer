@@ -34,13 +34,13 @@ module RubygemsAnalyzer
 
       def call
         table = CSV.table("lib/rubygems_analyzer/calculatored_data/#{letter}.csv", headers: false)
+        file_path = "lib/rubygems_analyzer/new_calculatored_data/#{letter}.csv"
         table.each do |row|
           client = Client::Rubygems.new(row[0])
-          # TODO: なぜかきれいにCSVにならない
-          row.push(client.versions.first['created_at'])
+          row.push(client.versions.last['created_at'])
+          puts row
+          File.open(file_path, 'a') { |f| f.puts(row.to_csv) }
         end
-        file_path = "lib/rubygems_analyzer/new_calculatored_data/#{letter}.csv"
-        File.open(file_path, 'wb') { |f| f.puts(table.to_csv) }
       end
 
       private
@@ -49,3 +49,5 @@ module RubygemsAnalyzer
     end
   end
 end
+
+RubygemsAnalyzer::AllCalculator::AddFirstPublishedToCsv.call
