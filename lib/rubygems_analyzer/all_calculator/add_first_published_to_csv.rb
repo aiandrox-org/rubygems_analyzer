@@ -49,5 +49,3 @@ module RubygemsAnalyzer
     end
   end
 end
-
-RubygemsAnalyzer::AllCalculator::AddFirstPublishedToCsv.call
