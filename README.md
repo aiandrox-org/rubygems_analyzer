@@ -18,8 +18,8 @@ bundler has 2071385454 downloads (rank 1/4)
 
 ## calculator weekly data
 
-1. register your rubygems.org API key to `~/.gems/credentials`
-2. add 0600 permission to `~/.gems/credentials`
+1. register your rubygems.org API key to `~/.gem/credentials`
+2. add 0600 permission to `~/.gem/credentials`
   ```sh
-  $ chmod 0600 ~/.gems/credentials
+  $ chmod 0600 ~/.gem/credentials
   ```
