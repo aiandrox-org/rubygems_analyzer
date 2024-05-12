@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'yaml'
 require_relative 'ruby_gem'
 require_relative 'client/rubygems'
 require_relative 'client/github'
@@ -17,7 +16,7 @@ module RubygemsAnalyzer
       def initialize(gem_name)
         @gem_name = gem_name
 
-        @ruby_gems = RubygemsAnalyzer::CalculatoredData::GetRubyGemsFromCsv.call(alphabets: ('M'..'Z').to_a)
+        @ruby_gems = RubygemsAnalyzer::CalculatoredData::GetRubyGemsFromCsv.call(alphabets: ('A'..'Z').to_a)
       end
 
       def run
@@ -26,11 +25,14 @@ module RubygemsAnalyzer
         @ruby_gems.delete_if { _1.name == target_gem.name }
         @ruby_gems.push(target_gem)
         ordered_data = @ruby_gems.sort_by(&:downloads).reverse
+        target_gem_index = ordered_data.find_index(target_gem)
 
-        max_name_length = ordered_data.map { _1.name.length }.max
-        scale_factor = ordered_data.map(&:downloads).max / 50 # is the max length of the graph
+        data_group_close_to_target = ordered_data[target_gem_index - 5..target_gem_index + 5]
 
-        ordered_data.each do |gem|
+        max_name_length = data_group_close_to_target.map { _1.name.length }.max
+        scale_factor = data_group_close_to_target.map(&:downloads).max / 50 # is the max length of the graph
+
+        data_group_close_to_target.each do |gem|
           graph_length = gem.downloads / scale_factor
           color = gem.name == gem_name ? "\e[33m" : "\e[34m"
           graph_bar = "#{color}#{'■' * graph_length}\e[0m"
