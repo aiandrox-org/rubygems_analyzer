@@ -20,6 +20,14 @@ bundler has 2071385454 downloads (rank 1/4)
 
 1. register your rubygems.org API key to `~/.gem/credentials`
 2. add 0600 permission to `~/.gem/credentials`
+
   ```sh
   $ chmod 0600 ~/.gem/credentials
-  ```
+```
+
+3. Register your GitHub API key to `.env`
+
+```sh
+  $ cp .env.sample .env
+  # ovrwrite GITHUB_OAUTH_CLIENT_ID and GITHUB_OAUTH_CLIENT_SECRET
+```
