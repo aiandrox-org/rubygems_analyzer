@@ -17,7 +17,7 @@ module RubygemsAnalyzer
 
       def get_star(repo_name:)
         client.repository(repo_name)[:stargazers_count]
-      rescue Octokit::NotFound, Octokit::InvalidRepository, Octokit::RepositoryUnavailable
+      rescue Octokit::NotFound, Octokit::InvalidRepository, Octokit::RepositoryUnavailable, Octokit::UnavailableForLegalReasons
         0
       rescue Faraday::ConnectionFailed
         retry
