@@ -26,7 +26,8 @@ module RubygemsAnalyzer
           version:,
           downloads: downloads_count,
           star_count: get_star_count(source_url),
-          source_url:
+          source_url:,
+          created_at: rubygems_client.versions.last['created_at']
         }
       rescue StandardError
         puts name
