@@ -17,11 +17,15 @@ module RubygemsAnalyzer
       end
 
       def versions
-        # NOTE: バージョンの順番が必ずしも作成日時の順番と一致しないため、作成日時でソートする
-        Gems.versions(gem_name).sort_by { |version| version['created_at'] }.reverse
+        # NOTE: バージョンの順番が必ずしもbuilt_atの順番と一致しないため、built_atでソートする
+        Gems.versions(gem_name).sort_by { |version| version['built_at'] }.reverse
       rescue Net::OpenTimeout
         sleep 3
         retry
+      end
+
+      def published_at
+        versions.last['created_at']
       end
 
       def version_count
