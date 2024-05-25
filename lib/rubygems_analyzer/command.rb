@@ -32,6 +32,7 @@ module RubygemsAnalyzer
         max_name_length = data_group_close_to_target.map { _1.name.length }.max
         scale_factor = data_group_close_to_target.map(&:downloads).max / 50 # is the max length of the graph
 
+        puts "#{gem_name} has #{target_gem.downloads} downloads, ranked #{target_gem_index + 1} out of #{ordered_data.size} gems"
         data_group_close_to_target.each do |gem|
           graph_length = gem.downloads / scale_factor
           color = gem.name == gem_name ? "\e[33m" : "\e[34m"
@@ -68,7 +69,7 @@ module RubygemsAnalyzer
       # NOTE: owner/repo_nameの形式で返す
       def extract_repository_name_from(source_url)
         return '' if source_url.nil?
-        return '' if source_url == 'https://github.com/' || source_url == 'http://github.com/'
+        return '' if ['https://github.com/', 'http://github.com/'].include?(source_url)
 
         if source_url.start_with?('https://github.com/') || source_url.start_with?('http://github.com/')
           puts source_url
