@@ -60,7 +60,8 @@ module RubygemsAnalyzer
           version: rubygems_client.versions.last,
           version_count: rubygems_client.version_count,
           average_version_leadtime: leadtimes.empty? ? 0 : leadtimes.sum / leadtimes.size,
-          star_count: repo_name.empty? ? 0 : github_client.get_star(repo_name:)
+          star_count: repo_name.empty? ? 0 : github_client.get_star(repo_name:),
+          published_at: rubygems_client.published_at
         )
       rescue Gems::NotFound
         @target_gem = nil
