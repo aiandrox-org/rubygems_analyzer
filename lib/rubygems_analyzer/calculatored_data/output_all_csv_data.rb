@@ -3,7 +3,6 @@
 require 'csv'
 
 require_relative 'get_ruby_gems_from_csv'
-
 module RubygemsAnalyzer
   module CalculatoredData
     class OutputAllCsvData
@@ -12,7 +11,7 @@ module RubygemsAnalyzer
       end
 
       def call
-        all_file_names = Dir.glob('lib/rubygems_analyzer/calculatored_data/*.csv')
+        all_file_names = Dir.glob('lib/rubygems_analyzer/new_calculatored_data/*.csv')
         alphabets = all_file_names.map { _1.split('/').last.split('.').first }
         data = GetRubyGemsFromCsv.call(alphabets:)
         write_to_file(data)
@@ -28,7 +27,8 @@ module RubygemsAnalyzer
               gem.version,
               gem.downloads,
               gem.star_count,
-              gem.source_url
+              gem.source_url,
+              gem.published_at
             ]
             csv << csv_row
           end

@@ -17,7 +17,7 @@ module RubygemsAnalyzer
 
       def call
         @alphabets.map do |letter|
-          CSV.read("lib/rubygems_analyzer/calculatored_data/#{letter}.csv").map do |row|
+          CSV.read("lib/rubygems_analyzer/new_calculatored_data/#{letter}.csv").map do |row|
             RubyGem.new(
               name: row[0],
               average_version_leadtime: row[1],
@@ -25,7 +25,8 @@ module RubygemsAnalyzer
               version: row[3],
               downloads: row[4],
               star_count: row[5],
-              source_url: row[6]
+              source_url: row[6],
+              published_at: row[7]
             )
           end
         end.flatten

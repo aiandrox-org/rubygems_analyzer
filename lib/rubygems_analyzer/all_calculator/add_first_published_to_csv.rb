@@ -38,7 +38,6 @@ module RubygemsAnalyzer
         table.each do |row|
           client = Client::Rubygems.new(row[0])
           row.push(client.versions.last['created_at'])
-          puts row
           File.open(file_path, 'a') { |f| f.puts(row.to_csv) }
         end
       end
